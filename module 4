@@ -1,0 +1,135 @@
+//Write a program, Once.java, that reads in a string and prints the first
+// character that appears exactly once in the string. Ex: ABCDBADDAB -> C.
+import java.util.Scanner;
+public class Once {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String text = input.nextLine();
+        for (int i = 0; i < text.length(); i++) {
+            char currentCharacter = text.charAt(i);
+            int count = 0;
+
+            for (int j = 0; j < text.length(); j++){
+                if (text.charAt(j) == currentCharacter) {
+                    count++;
+                }
+            }
+            if (count == 1) {
+                System.out.println(currentCharacter);
+                break;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+public class ROT13 {
+    public static void main(String[] args) {
+    //grab the first thing typed
+    String text = args[0];
+
+    // start at positon 0 and cont. while there are char remaining
+    for(int i = 0; i< text.length(); i++) {
+        char currentCharacter = text.charAt(i);
+        if (currentCharacter >= 'A' && currentCharacter <= 'M'){
+            currentCharacter = (char) (currentCharacter + 13);
+        }
+        else if (currentCharacter >= 'a' && currentCharacter <= 'm') {
+            currentCharacter = (char) (currentCharacter + 13);
+        }
+        else if (currentCharacter >= 'N' && currentCharacter <= 'Z') {
+            currentCharacter = (char) (currentCharacter - 13);
+        }
+        else if (currentCharacter >= 'n' && currentCharacter <= 'z') {
+            currentCharacter = (char) (currentCharacter - 13);
+        }
+        System.out.print(currentCharacter);
+    }
+
+    }
+}
+
+
+
+
+
+
+
+
+import java.time.LocalDate;
+public class CustomDate {
+    private LocalDate date;
+   //Constructor
+    public CustomDate(int month, int day, int year){
+       date = LocalDate.of(year,month,day);
+    }
+    //# of days btwn the 2 dates
+    public long daysBetween(CustomDate other){
+        //epoch day starts Jan 1, 1970
+        return Math.abs(date.toEpochDay()-other.date.toEpochDay());
+    }
+    //find day of the week
+    public String dayOfWeek(){
+        return date.getDayOfWeek().toString();
+    }
+    public static void main(String[] args) {
+    CustomDate birthday = new CustomDate(11,13,2003);
+    CustomDate halloween = new CustomDate(10,31,2026);
+    System.out.println("Day:" + birthday.dayOfWeek());
+    System.out.println("Days Between:" + birthday.daysBetween(halloween));
+
+    }
+}
+
+
+
+
+
+
+
+
+public class SodaMachine {
+    private int balance = 0;
+    private int price = 150;
+
+    // Insert money into the machine
+    public void insertCoin(int cents) {
+        balance += cents;
+    }
+
+    // Buy a soda
+    public void buy() {
+        if (balance >= price) {
+            balance -= price;
+            System.out.println("Enjoy your soda!");
+        } else {
+            System.out.println("Not enough money!");
+        }
+    }
+
+    // Return leftover money
+    public int getChange() {
+        int change = balance;
+        balance = 0;
+        return change;
+    }
+
+    public static void main(String[] args) {
+        SodaMachine machine = new SodaMachine();
+
+        machine.insertCoin(100);
+        machine.insertCoin(100);
+
+        machine.buy();
+
+        System.out.println("Change: "
+                + machine.getChange() + " cents");
+    }
+}
